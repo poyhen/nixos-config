@@ -5,11 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   networking.firewall.checkReversePath = false;
@@ -17,7 +16,8 @@
   zramSwap.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+    intel-vaapi-driver =
+      pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
   hardware.opengl = {
     # hardware.graphics on unstable
@@ -28,7 +28,9 @@
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Force intel-media-driver
 
   #Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -101,7 +103,6 @@
   services.gnome.gnome-remote-desktop.enable = true;
   programs.direnv.enable = true;
 
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   users.mutableUsers = false;
@@ -109,7 +110,8 @@
   users.users.frkn = {
     isNormalUser = true;
     description = "frkn";
-    hashedPassword = "$6$NSFZDfM1gztLih3o$1OvuK/1.KxFo3veRLOEIqU4EBXlDOm0K8X.F75yxHPxG81DpIViVGpkTyV2vZwp6g0UIsS34jncpi/0vrpcac/";
+    hashedPassword =
+      "$6$NSFZDfM1gztLih3o$1OvuK/1.KxFo3veRLOEIqU4EBXlDOm0K8X.F75yxHPxG81DpIViVGpkTyV2vZwp6g0UIsS34jncpi/0vrpcac/";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       brave
@@ -125,7 +127,7 @@
       localsend
       vulkan-tools
       btop
-      unstable.zed-editor
+      zed-editor
       mesa-demos
       just
       (vscode-with-extensions.override {
@@ -148,7 +150,17 @@
       gnome.gnome-remote-desktop
       remmina
       distrobox
+      ticktick
     ];
+  };
+
+  programs.bash = {
+    enableCompletion = true;
+    interactiveShellInit = ''
+      HISTSIZE=10000
+      HISTFILESIZE=10000
+      HISTCONTROL=ignoreboth:erasedups
+    '';
   };
 
   # Install firefox.
@@ -158,17 +170,17 @@
   nixpkgs.config.allowUnfree = true;
 
   virtualisation.containers.enable = true;
-    virtualisation = {
-      podman = {
-        enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
 
-        # Create a `docker` alias for podman, to use it as a drop-in replacement
-        dockerCompat = true;
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
 
-        # Required for containers under podman-compose to be able to talk to each other.
-        defaultNetwork.settings.dns_enabled = true;
-      };
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
     };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
