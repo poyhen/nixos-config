@@ -151,8 +151,12 @@
       remmina
       distrobox
       ticktick
+      atuin
+      blesh
     ];
   };
+
+  programs.bash.blesh.enable = true;
 
   programs.bash = {
     enableCompletion = true;
