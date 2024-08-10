@@ -102,6 +102,7 @@
 
   services.gnome.gnome-remote-desktop.enable = true;
   programs.direnv.enable = true;
+  programs.direnv.enableFishIntegration = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -151,19 +152,17 @@
       remmina
       distrobox
       ticktick
-      atuin
-      blesh
     ];
   };
 
-  programs.bash.blesh.enable = true;
-
+  programs.fish.enable = true;
   programs.bash = {
-    enableCompletion = true;
     interactiveShellInit = ''
-      HISTSIZE=10000
-      HISTFILESIZE=10000
-      HISTCONTROL=ignoreboth:erasedups
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
     '';
   };
 
