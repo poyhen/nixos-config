@@ -4,11 +4,17 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  monitorsXmlContent = builtins.readFile ./monitors.xml;
+  monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  systemd.tmpfiles.rules =
+    [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   networking.firewall.checkReversePath = false;
@@ -152,6 +158,7 @@
       remmina
       distrobox
       ticktick
+      songrec
     ];
   };
 
