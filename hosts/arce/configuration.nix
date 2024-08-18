@@ -16,7 +16,9 @@ in {
   systemd.tmpfiles.rules =
     [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  chaotic.scx.enable = true;
+
   networking.firewall.checkReversePath = false;
 
   zramSwap.enable = true;
