@@ -158,9 +158,15 @@ in {
       remmina
       distrobox
       ticktick
-      songrec
     ];
   };
+
+  security.pam.loginLimits = [{
+    domain = "*";
+    item = "memlock";
+    type = "-";
+    value = "-1";
+  }];
 
   programs.fish.enable = true;
   programs.bash = {
