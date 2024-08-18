@@ -161,6 +161,8 @@ in {
     ];
   };
 
+  programs.starship.enable = true;
+
   security.pam.loginLimits = [{
     domain = "*";
     item = "memlock";
