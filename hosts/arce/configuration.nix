@@ -146,6 +146,7 @@ in {
           ms-python.python
           ms-python.vscode-pylance
           charliermarsh.ruff
+          denoland.vscode-deno
         ];
       })
       ffmpeg
@@ -160,6 +161,9 @@ in {
       remmina
       distrobox
       ticktick
+      lsd
+      nerdfonts
+      bat
     ];
   };
 
@@ -173,6 +177,10 @@ in {
   }];
 
   programs.fish.enable = true;
+  programs.fish.shellAliases = {
+    ls = "lsd -al";
+    cat = "bat";
+  };
   programs.bash = {
     interactiveShellInit = ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
