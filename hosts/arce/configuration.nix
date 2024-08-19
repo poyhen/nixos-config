@@ -147,6 +147,8 @@ in {
           ms-python.vscode-pylance
           charliermarsh.ruff
           denoland.vscode-deno
+          bradlc.vscode-tailwindcss
+          supermaven.supermaven
         ];
       })
       ffmpeg
