@@ -27,7 +27,7 @@ in {
     intel-vaapi-driver =
       pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
-  hardware.opengl = {
+  hardware.graphics = {
     # hardware.graphics on unstable
     enable = true;
     extraPackages = with pkgs; [
@@ -85,8 +85,8 @@ in {
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
