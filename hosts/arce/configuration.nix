@@ -249,4 +249,22 @@ in {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
+  # experimental stuff
+  networking.nftables.enable = true;
+
+  system.switch = {
+    enable = false;
+    enableNg = true;
+  };
+
+  boot.initrd.systemd.enable = true;
+
+  networking.networkmanager.wifi.backend = "iwd";
+
+  boot.tmp.useTmpfs = true;
+  systemd.services.nix-daemon = { environment.TMPDIR = "/var/tmp"; };
+
+  services.fstrim.enable = true;
+
+  services.dbus.implementation = "broker";
 }
