@@ -166,6 +166,7 @@ in {
       lsd
       nerdfonts
       bat
+      signal-desktop
     ];
   };
 
