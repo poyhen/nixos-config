@@ -125,7 +125,6 @@ in {
     packages = with pkgs; [
       brave
       git
-      telegram-desktop
       bitwarden-desktop
       authenticator
       micro
