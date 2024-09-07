@@ -138,7 +138,7 @@ in {
       localsend
       vulkan-tools
       btop
-      zed-editor
+      zed-editor.fhs
       mesa-demos
       just
       (vscode-with-extensions.override {
@@ -157,11 +157,11 @@ in {
       vesktop
       spotify
       python312
-      gnome.gnome-weather
+      gnome-weather
       loupe
       feather
       cloudflared
-      gnome.gnome-remote-desktop
+      gnome-remote-desktop
       remmina
       distrobox
       lsd
@@ -170,7 +170,7 @@ in {
       signal-desktop
       warp-terminal
       kitty
-      gnome.zenity
+      zenity
       nnn
       zoxide
     ];
