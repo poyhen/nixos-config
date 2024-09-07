@@ -16,8 +16,8 @@ in {
   systemd.tmpfiles.rules =
     [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  chaotic.scx.enable = true;
+  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  #chaotic.scx.enable = true;
 
   networking.firewall.checkReversePath = false;
 
@@ -82,6 +82,9 @@ in {
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  #services.desktopManager.cosmic.enable = true;
+  #services.displayManager.cosmic-greeter.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -161,7 +164,6 @@ in {
       gnome.gnome-remote-desktop
       remmina
       distrobox
-      ticktick
       lsd
       nerdfonts
       bat
