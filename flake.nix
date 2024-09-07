@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, chaotic, nixos-cosmic, ... }@inputs: {
+  outputs = { nixpkgs, chaotic, nixos-cosmic, ... }@inputs: {
     nixosConfigurations.arce = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
