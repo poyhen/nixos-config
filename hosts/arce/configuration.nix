@@ -126,7 +126,7 @@ in {
       "$6$NSFZDfM1gztLih3o$1OvuK/1.KxFo3veRLOEIqU4EBXlDOm0K8X.F75yxHPxG81DpIViVGpkTyV2vZwp6g0UIsS34jncpi/0vrpcac/";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      brave
+      fd
       git
       bitwarden-desktop
       authenticator
@@ -262,6 +262,8 @@ in {
   networking.networkmanager.wifi.backend = "iwd";
 
   boot.tmp.useTmpfs = true;
+  boot.tmp.tmpfsSize = "100%";
+
   systemd.services.nix-daemon = { environment.TMPDIR = "/var/tmp"; };
 
   services.fstrim.enable = true;
