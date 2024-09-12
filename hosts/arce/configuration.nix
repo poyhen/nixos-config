@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   monitorsXmlContent = builtins.readFile ./monitors.xml;
@@ -16,8 +16,12 @@ in {
   systemd.tmpfiles.rules =
     [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
 
-  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  #chaotic.scx.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  chaotic.scx.enable = true;
+
+  systemd.services.scx = {
+    serviceConfig = { StandardError = lib.mkForce "null"; };
+  };
 
   networking.firewall.checkReversePath = false;
 
