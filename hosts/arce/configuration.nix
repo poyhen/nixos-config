@@ -178,7 +178,7 @@ in {
       nnn
       zoxide
       nixd
-      nixfmt
+      nixfmt-rfc-style
     ];
   };
 
