@@ -7,20 +7,22 @@
 let
   monitorsXmlContent = builtins.readFile ./monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  systemd.tmpfiles.rules =
-    [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
+  systemd.tmpfiles.rules = [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   chaotic.scx.enable = true;
 
   systemd.services.scx = {
-    serviceConfig = { StandardError = lib.mkForce "null"; };
+    serviceConfig = {
+      StandardError = lib.mkForce "null";
+    };
   };
 
   networking.firewall.checkReversePath = false;
@@ -28,8 +30,7 @@ in {
   zramSwap.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver =
-      pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
   hardware.graphics = {
     # hardware.graphics on unstable
@@ -45,7 +46,10 @@ in {
   }; # Force intel-media-driver
 
   #Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -126,9 +130,11 @@ in {
   users.users.frkn = {
     isNormalUser = true;
     description = "frkn";
-    hashedPassword =
-      "$6$NSFZDfM1gztLih3o$1OvuK/1.KxFo3veRLOEIqU4EBXlDOm0K8X.F75yxHPxG81DpIViVGpkTyV2vZwp6g0UIsS34jncpi/0vrpcac/";
-    extraGroups = [ "networkmanager" "wheel" ];
+    hashedPassword = "$6$NSFZDfM1gztLih3o$1OvuK/1.KxFo3veRLOEIqU4EBXlDOm0K8X.F75yxHPxG81DpIViVGpkTyV2vZwp6g0UIsS34jncpi/0vrpcac/";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       fd
       git
@@ -184,12 +190,14 @@ in {
 
   programs.starship.enable = true;
 
-  security.pam.loginLimits = [{
-    domain = "*";
-    item = "memlock";
-    type = "-";
-    value = "-1";
-  }];
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      item = "memlock";
+      type = "-";
+      value = "-1";
+    }
+  ];
 
   programs.fish.enable = true;
   programs.fish.shellAliases = {
@@ -268,7 +276,9 @@ in {
   boot.tmp.useTmpfs = true;
   boot.tmp.tmpfsSize = "100%";
 
-  systemd.services.nix-daemon = { environment.TMPDIR = "/var/tmp"; };
+  systemd.services.nix-daemon = {
+    environment.TMPDIR = "/var/tmp";
+  };
 
   services.fstrim.enable = true;
 
