@@ -185,6 +185,8 @@ in
       zoxide
       nixd
       nixfmt-rfc-style
+      qbittorrent
+      code-cursor
     ];
   };
 
@@ -287,5 +289,12 @@ in
   xdg.portal.enable = true;
   xdg.portal.xdgOpenUsePortal = true;
   services.flatpak.enable = true;
+
+  services.flatpak.packages = [
+    "com.brave.Browser"
+    "com.ticktick.TickTick"
+    "de.haeckerfelix.Fragments"
+    "org.telegram.desktop"
+  ];
 
 }
