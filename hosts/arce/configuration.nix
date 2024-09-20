@@ -297,4 +297,6 @@ in
     "org.telegram.desktop"
   ];
 
+  services.flatpak.update.onActivation = true;
+
 }
