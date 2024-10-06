@@ -3,11 +3,16 @@
 let
   monitorsXmlContent = builtins.readFile ./monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+  mitmproxyPath = /home/frkn/Documents/mitmproxy-ca-cert.pem;
 in
 {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  #mitmproxy
+  security.pki.certificateFiles =
+    if builtins.pathExists mitmproxyPath then [ mitmproxyPath ] else [ ];
 
   #monitors stuff
   systemd.tmpfiles.rules = [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}" ];
@@ -195,6 +200,7 @@ in
       qbittorrent
       code-cursor
       rust-analyzer
+      mitmproxy
     ];
   };
 

@@ -15,7 +15,7 @@
       nix-flatpak,
       nixos-cosmic,
       ...
-    }@inputs:
+    }:
     {
       nixosConfigurations.arce = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
