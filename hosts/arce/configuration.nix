@@ -201,6 +201,7 @@ in
       code-cursor
       rust-analyzer
       mitmproxy
+      rclone
     ];
   };
 
