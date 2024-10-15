@@ -150,14 +150,12 @@ in
     packages = with pkgs; [
       fd
       git
-      bitwarden-desktop
       authenticator
       micro
       mpv
       yt-dlp
       mission-center
       ptyxis
-      localsend
       vulkan-tools
       btop
       zed-editor.fhs
@@ -202,6 +200,7 @@ in
       rust-analyzer
       mitmproxy
       rclone
+      ripgrep
     ];
   };
 
@@ -227,6 +226,7 @@ in
     }
     "de.haeckerfelix.Fragments"
     "org.telegram.desktop"
+    "org.localsend.localsend_app"
   ];
 
   #yes
