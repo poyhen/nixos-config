@@ -1,5 +1,4 @@
 update:
-    @sudo -v && echo "Sudo authenticated."
     nix flake update
     just boot
 

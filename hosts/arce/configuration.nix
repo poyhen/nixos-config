@@ -110,6 +110,9 @@ in
     }
   ];
 
+  security.sudo-rs.enable = true;
+  security.sudo-rs.wheelNeedsPassword = false;
+
   #my system/user and packages
   environment.systemPackages = with pkgs; [
     dive
