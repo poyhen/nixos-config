@@ -27,8 +27,6 @@
               nixpkgs.overlays = [
                 (final: prev: {
                   code-cursor = custom-packages.packages.${pkgs.system}.code-cursor;
-                  # Add the utillinux compatibility fix
-                  #utillinux = if prev ? util-linux then prev.util-linux else prev.utillinux;
                 })
               ];
             }
