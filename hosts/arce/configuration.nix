@@ -228,6 +228,7 @@ in
     "de.haeckerfelix.Fragments"
     "org.telegram.desktop"
     "org.localsend.localsend_app"
+    "io.github.equicord.equibop"
   ];
 
   #yes
