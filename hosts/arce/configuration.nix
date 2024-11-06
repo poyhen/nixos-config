@@ -39,7 +39,13 @@ in
   boot.tmp.useTmpfs = true;
   boot.tmp.tmpfsSize = "100%";
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  chaotic.scx.enable = true;
+  chaotic = {
+    scx = {
+      enable = true;
+      package = pkgs.scx.full;
+      scheduler = "scx_bpfland";
+    };
+  };
 
   #system
   networking.networkmanager.enable = true;
