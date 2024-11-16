@@ -3,7 +3,7 @@ update:
     just boot
 
 switch:
-    sudo nixos-rebuild switch --option warn-dirty false --flake .#arce
+    sudo nixos-rebuild switch -L --option warn-dirty false --flake .#arce
 
 boot:
-    sudo nixos-rebuild boot --option warn-dirty false --flake .#arce
+    sudo nixos-rebuild boot -L --option warn-dirty false --flake .#arce

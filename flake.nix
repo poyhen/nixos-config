@@ -30,6 +30,14 @@
               nixpkgs.overlays = [
                 (final: prev: {
                   code-cursor = custom-packages.packages.${pkgs.system}.code-cursor;
+                  #remove later
+                  mitmproxy = prev.mitmproxy.overridePythonAttrs (old: {
+                    pythonRelaxDeps = (old.pythonRelaxDeps or [ ]) ++ [
+                      "passlib"
+                      "protobuf"
+                      "urwid"
+                    ];
+                  });
                 })
               ];
             }

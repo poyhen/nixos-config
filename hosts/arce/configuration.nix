@@ -30,6 +30,7 @@ in
   systemd.services.nix-daemon = {
     environment.TMPDIR = "/var/tmp";
   };
+  programs.nix-ld.enable = true;
 
   #boot and kernel
   boot.loader.systemd-boot.enable = true;
@@ -161,11 +162,10 @@ in
       micro
       mpv
       yt-dlp
-      mission-center
       ptyxis
       vulkan-tools
       btop
-      zed-editor.fhs
+      zed-editor_git
       mesa-demos
       just
       (vscode-with-extensions.override {
