@@ -40,13 +40,6 @@ in
   boot.tmp.useTmpfs = true;
   boot.tmp.tmpfsSize = "100%";
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  chaotic = {
-    scx = {
-      enable = true;
-      package = pkgs.scx.full;
-      scheduler = "scx_bpfland";
-    };
-  };
 
   #system
   networking.networkmanager.enable = true;
@@ -57,7 +50,6 @@ in
 
   zramSwap.enable = true;
   services.fstrim.enable = true;
-  services.dbus.implementation = "broker";
   services.printing.enable = true;
 
   services.xserver.enable = true;
@@ -202,6 +194,7 @@ in
       zoxide
       nixd
       nixfmt-rfc-style
+      nil
       qbittorrent
       code-cursor
       rust-analyzer
