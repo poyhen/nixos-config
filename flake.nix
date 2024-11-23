@@ -6,6 +6,10 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
     custom-packages.url = "github:poyhen/custom-packages";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -14,6 +18,7 @@
       nix-flatpak,
       custom-packages,
       determinate,
+      home-manager,
       ...
     }:
     {
@@ -22,6 +27,12 @@
         modules = [
           determinate.nixosModules.default
           ./hosts/arce/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.frkn = import ./hosts/arce/home.nix;
+          }
           chaotic.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
           (
